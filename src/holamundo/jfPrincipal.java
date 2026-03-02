@@ -49,6 +49,7 @@ public class jfPrincipal extends javax.swing.JFrame {
         jtfDato2.setText("Dato 2");
 
         jbSum.setText("+");
+        jbSum.addActionListener(this::jbSumActionPerformed);
 
         jbMultiplicacion.setText("*");
         jbMultiplicacion.addActionListener(this::jbMultiplicacionActionPerformed);
@@ -135,6 +136,10 @@ public class jfPrincipal extends javax.swing.JFrame {
     private void jtfDato1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfDato1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfDato1ActionPerformed
+
+    private void jbSumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSumActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbSumActionPerformed
 
     /**
      * @param args the command line arguments
