@@ -19,6 +19,7 @@ public class HolaMundo {
         System.out.println("Hola Mundo");
         System.out.println("Otro saludo");
         System.out.println(contador);
+        System.out.println("Como estas");
     }
     
     
