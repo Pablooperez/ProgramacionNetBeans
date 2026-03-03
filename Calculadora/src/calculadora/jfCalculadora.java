@@ -298,9 +298,9 @@ public class jfCalculadora extends javax.swing.JFrame {
     private void jbIgualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIgualActionPerformed
         int iVariable1;
         int iVariable2;
-        iVariable1=Integer.getInteger(jLabel1.getText());
-        iVariable2=Integer.getInteger(jtPanel.getText());
-        Integer iResultado;
+        iVariable1=Integer.parseInt(jLabel1.getText());
+        iVariable2=Integer.parseInt(jtPanel.getText());
+        int iResultado;
         String sResultadoFinal;
         
         switch (jLabel2.getText()){
