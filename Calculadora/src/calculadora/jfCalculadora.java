@@ -15,6 +15,7 @@ public class jfCalculadora extends javax.swing.JFrame {
     public jfCalculadora() {
         setTitle("Calculadora v1.0");
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -29,7 +30,7 @@ public class jfCalculadora extends javax.swing.JFrame {
         jtPanel = new javax.swing.JTextField();
         jbLimpiarTodo = new javax.swing.JButton();
         jbBorrarCaracter = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jbCambiarSimbolo = new javax.swing.JButton();
         jbDivision = new javax.swing.JButton();
         jb7 = new javax.swing.JButton();
         jb8 = new javax.swing.JButton();
@@ -48,66 +49,96 @@ public class jfCalculadora extends javax.swing.JFrame {
         jbIgual = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jtPanel.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jtPanel.addActionListener(this::jtPanelActionPerformed);
 
+        jbLimpiarTodo.setBackground(new java.awt.Color(212, 234, 247));
         jbLimpiarTodo.setText("AC");
         jbLimpiarTodo.addActionListener(this::jbLimpiarTodoActionPerformed);
 
+        jbBorrarCaracter.setBackground(new java.awt.Color(212, 234, 247));
         jbBorrarCaracter.setText("<<");
+        jbBorrarCaracter.addActionListener(this::jbBorrarCaracterActionPerformed);
 
-        jButton3.setText("+/-");
+        jbCambiarSimbolo.setBackground(new java.awt.Color(212, 234, 247));
+        jbCambiarSimbolo.setText("+/-");
+        jbCambiarSimbolo.addActionListener(this::jbCambiarSimboloActionPerformed);
 
+        jbDivision.setBackground(new java.awt.Color(182, 204, 216));
         jbDivision.setText("/");
         jbDivision.addActionListener(this::jbDivisionActionPerformed);
 
+        jb7.setBackground(new java.awt.Color(113, 196, 239));
         jb7.setText("7");
         jb7.addActionListener(this::jb7ActionPerformed);
 
+        jb8.setBackground(new java.awt.Color(113, 196, 239));
         jb8.setText("8");
         jb8.addActionListener(this::jb8ActionPerformed);
 
+        jb9.setBackground(new java.awt.Color(113, 196, 239));
         jb9.setText("9");
         jb9.addActionListener(this::jb9ActionPerformed);
 
+        jbMultiplicacion.setBackground(new java.awt.Color(182, 204, 216));
         jbMultiplicacion.setText("*");
         jbMultiplicacion.addActionListener(this::jbMultiplicacionActionPerformed);
 
+        jb4.setBackground(new java.awt.Color(113, 196, 239));
         jb4.setText("4");
         jb4.addActionListener(this::jb4ActionPerformed);
 
+        jb5.setBackground(new java.awt.Color(113, 196, 239));
         jb5.setText("5");
         jb5.addActionListener(this::jb5ActionPerformed);
 
+        jb6.setBackground(new java.awt.Color(113, 196, 239));
         jb6.setText("6");
         jb6.addActionListener(this::jb6ActionPerformed);
 
+        jbResta.setBackground(new java.awt.Color(182, 204, 216));
         jbResta.setText("-");
         jbResta.addActionListener(this::jbRestaActionPerformed);
 
+        jb1.setBackground(new java.awt.Color(113, 196, 239));
         jb1.setText("1");
         jb1.addActionListener(this::jb1ActionPerformed);
 
+        jb2.setBackground(new java.awt.Color(113, 196, 239));
         jb2.setText("2");
         jb2.addActionListener(this::jb2ActionPerformed);
 
+        jb3.setBackground(new java.awt.Color(113, 196, 239));
         jb3.setText("3");
         jb3.addActionListener(this::jb3ActionPerformed);
 
+        jbSuma.setBackground(new java.awt.Color(182, 204, 216));
         jbSuma.setText("+");
         jbSuma.addActionListener(this::jbSumaActionPerformed);
 
+        jb0.setBackground(new java.awt.Color(113, 196, 239));
         jb0.setText("0");
         jb0.addActionListener(this::jb0ActionPerformed);
 
+        jbComa.setBackground(new java.awt.Color(113, 196, 239));
         jbComa.setText(",");
         jbComa.addActionListener(this::jbComaActionPerformed);
 
+        jbIgual.setBackground(new java.awt.Color(245, 244, 241));
         jbIgual.setText("=");
         jbIgual.addActionListener(this::jbIgualActionPerformed);
+
+        jLabel1.setBackground(new java.awt.Color(51, 51, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jLabel2.setBackground(new java.awt.Color(153, 255, 51));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,7 +149,22 @@ public class jfCalculadora extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jtPanel)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jbLimpiarTodo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbBorrarCaracter, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbCambiarSimbolo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbDivision, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jb7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -152,38 +198,24 @@ public class jfCalculadora extends javax.swing.JFrame {
                                         .addComponent(jbComa, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jbIgual, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jbLimpiarTodo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jbBorrarCaracter, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jbDivision, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jtPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                .addComponent(jtPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbLimpiarTodo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbBorrarCaracter, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbCambiarSimbolo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbDivision, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -208,7 +240,7 @@ public class jfCalculadora extends javax.swing.JFrame {
                     .addComponent(jb0, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbComa, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbIgual, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -225,8 +257,6 @@ public class jfCalculadora extends javax.swing.JFrame {
 
     private void jb1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb1ActionPerformed
         jtPanel.setText(jtPanel.getText()+("1"));
-        int i1;
-        i1=1;
     }//GEN-LAST:event_jb1ActionPerformed
 
     private void jb2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb2ActionPerformed
@@ -262,13 +292,14 @@ public class jfCalculadora extends javax.swing.JFrame {
     }//GEN-LAST:event_jb9ActionPerformed
 
     private void jbComaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbComaActionPerformed
-        jtPanel.setText(jtPanel.getText()+(","));
+        jtPanel.setText(jtPanel.getText()+("."));
     }//GEN-LAST:event_jbComaActionPerformed
 
     private void jbLimpiarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarTodoActionPerformed
         jtPanel.setText("");
         jLabel1.setText("");
         jLabel2.setText("");
+        jLabel3.setText("");
     }//GEN-LAST:event_jbLimpiarTodoActionPerformed
 
     private void jbSumaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSumaActionPerformed
@@ -296,39 +327,79 @@ public class jfCalculadora extends javax.swing.JFrame {
     }//GEN-LAST:event_jbDivisionActionPerformed
 
     private void jbIgualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIgualActionPerformed
-        int iVariable1;
-        int iVariable2;
-        iVariable1=Integer.parseInt(jLabel1.getText());
-        iVariable2=Integer.parseInt(jtPanel.getText());
-        int iResultado;
+        double iVariable1;
+        double iVariable2;
+
+        double iResultado;
         String sResultadoFinal;
-        
+
+        if (jtPanel.getText().isEmpty()) {
+            
+        }else{
+        iVariable1=Double.valueOf(jLabel1.getText());
+        iVariable2=Double.valueOf(jtPanel.getText());
         switch (jLabel2.getText()){
             case "+":
+                jLabel3.setText(jtPanel.getText());
                 iResultado=iVariable1+iVariable2;
-                sResultadoFinal=String.valueOf(iResultado);
+                sResultadoFinal=String.format("%.2f",iResultado);
                 jtPanel.setText(sResultadoFinal);
             break;
             
             case "-":
+                jLabel3.setText(jtPanel.getText());
                 iResultado=iVariable1-iVariable2;
-                sResultadoFinal=String.valueOf(iResultado);
+                sResultadoFinal=String.format("%.2f",iResultado);
                 jtPanel.setText(sResultadoFinal);
             break;
             
             case "*":
+                jLabel3.setText(jtPanel.getText());
                 iResultado=iVariable1*iVariable2;
-                sResultadoFinal=String.valueOf(iResultado);
+                sResultadoFinal=String.format("%.2f",iResultado);
                 jtPanel.setText(sResultadoFinal);
             break;
             
             case "/":
+                jLabel3.setText(jtPanel.getText());
                 iResultado=iVariable1/iVariable2;
-                sResultadoFinal=String.valueOf(iResultado);
+                sResultadoFinal=String.format("%.2f",iResultado);
                 jtPanel.setText(sResultadoFinal);
             break;
         }
+        }
+       
     }//GEN-LAST:event_jbIgualActionPerformed
+
+    private void jbBorrarCaracterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarCaracterActionPerformed
+        
+        if (jtPanel.getText().equals("")) {
+            jtPanel.setText("");
+        }else{
+            String sVariablePanel=jtPanel.getText();
+            String sVariableNueva=sVariablePanel.substring(0, sVariablePanel.length() -1);
+            jtPanel.setText(sVariableNueva);
+        }
+    }//GEN-LAST:event_jbBorrarCaracterActionPerformed
+
+    private void jbCambiarSimboloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCambiarSimboloActionPerformed
+        String sNuevo=jtPanel.getText();
+        int iNuevo=Integer.parseInt(sNuevo);
+        int iNuevo2;
+        
+        if (iNuevo>0) {
+            iNuevo2=iNuevo-(iNuevo*2);
+            String sNuevo2=String.valueOf(iNuevo2);
+            jtPanel.setText(sNuevo2);
+        }
+        if (iNuevo<0) {
+            iNuevo2=Math.abs(iNuevo);
+            String sNuevo2=String.valueOf(iNuevo2);
+            jtPanel.setText(sNuevo2);
+        }
+        
+        
+    }//GEN-LAST:event_jbCambiarSimboloActionPerformed
 
     /**
      * @param args the command line arguments
@@ -356,9 +427,9 @@ public class jfCalculadora extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JButton jb0;
     private javax.swing.JButton jb1;
     private javax.swing.JButton jb2;
@@ -370,6 +441,7 @@ public class jfCalculadora extends javax.swing.JFrame {
     private javax.swing.JButton jb8;
     private javax.swing.JButton jb9;
     private javax.swing.JButton jbBorrarCaracter;
+    private javax.swing.JButton jbCambiarSimbolo;
     private javax.swing.JButton jbComa;
     private javax.swing.JButton jbDivision;
     private javax.swing.JButton jbIgual;
