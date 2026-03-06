@@ -4,6 +4,8 @@
  */
 package calculadora;
 
+import java.awt.Color;
+
 /**
  *
  * @author ciclos.pablo
@@ -16,6 +18,7 @@ public class jfCalculadora extends javax.swing.JFrame {
         setTitle("Calculadora v1.0");
         initComponents();
         setLocationRelativeTo(null);
+        setBackground(Color.green);
     }
 
     /**
@@ -52,6 +55,7 @@ public class jfCalculadora extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 255, 204));
 
         jtPanel.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jtPanel.addActionListener(this::jtPanelActionPerformed);
@@ -336,39 +340,44 @@ public class jfCalculadora extends javax.swing.JFrame {
         if (jtPanel.getText().isEmpty()) {
             
         }else{
-        iVariable1=Double.valueOf(jLabel1.getText());
-        iVariable2=Double.valueOf(jtPanel.getText());
-        switch (jLabel2.getText()){
-            case "+":
-                jLabel3.setText(jtPanel.getText());
-                iResultado=iVariable1+iVariable2;
-                sResultadoFinal=String.format("%.2f",iResultado);
-                jtPanel.setText(sResultadoFinal);
-            break;
+            iVariable1=Double.valueOf(jLabel1.getText());
+            iVariable2=Double.valueOf(jtPanel.getText());
+            switch (jLabel2.getText()){
+                case "+":
+                    jLabel3.setText(jtPanel.getText());
+                    iResultado=iVariable1+iVariable2;
+                    sResultadoFinal=String.format("%.2f",iResultado);
+                    jtPanel.setText(sResultadoFinal);
+                break;
             
-            case "-":
-                jLabel3.setText(jtPanel.getText());
-                iResultado=iVariable1-iVariable2;
-                sResultadoFinal=String.format("%.2f",iResultado);
-                jtPanel.setText(sResultadoFinal);
-            break;
+                case "-":
+                    jLabel3.setText(jtPanel.getText());
+                    iResultado=iVariable1-iVariable2;
+                    sResultadoFinal=String.format("%.2f",iResultado);
+                    jtPanel.setText(sResultadoFinal);
+                break;
             
-            case "*":
-                jLabel3.setText(jtPanel.getText());
-                iResultado=iVariable1*iVariable2;
-                sResultadoFinal=String.format("%.2f",iResultado);
-                jtPanel.setText(sResultadoFinal);
-            break;
+                case "*":
+                    jLabel3.setText(jtPanel.getText());
+                    iResultado=iVariable1*iVariable2;
+                    sResultadoFinal=String.format("%.2f",iResultado);
+                    jtPanel.setText(sResultadoFinal);
+                break;
             
-            case "/":
-                jLabel3.setText(jtPanel.getText());
-                iResultado=iVariable1/iVariable2;
-                sResultadoFinal=String.format("%.2f",iResultado);
-                jtPanel.setText(sResultadoFinal);
-            break;
+                case "/":
+                    if (iVariable2==0) {
+                        jLabel3.setText(jtPanel.getText());
+                        jtPanel.setText("Error: div/0");
+                    }else{
+                        jLabel3.setText(jtPanel.getText());
+                        iResultado=iVariable1/iVariable2;
+                        sResultadoFinal=String.format("%.2f",iResultado);
+                        jtPanel.setText(sResultadoFinal);
+                    }
+                    
+                break;
+            }
         }
-        }
-       
     }//GEN-LAST:event_jbIgualActionPerformed
 
     private void jbBorrarCaracterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarCaracterActionPerformed
@@ -384,8 +393,8 @@ public class jfCalculadora extends javax.swing.JFrame {
 
     private void jbCambiarSimboloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCambiarSimboloActionPerformed
         String sNuevo=jtPanel.getText();
-        int iNuevo=Integer.parseInt(sNuevo);
-        int iNuevo2;
+        double iNuevo=Double.parseDouble(sNuevo);
+        double iNuevo2;
         
         if (iNuevo>0) {
             iNuevo2=iNuevo-(iNuevo*2);
@@ -397,8 +406,6 @@ public class jfCalculadora extends javax.swing.JFrame {
             String sNuevo2=String.valueOf(iNuevo2);
             jtPanel.setText(sNuevo2);
         }
-        
-        
     }//GEN-LAST:event_jbCambiarSimboloActionPerformed
 
     /**
