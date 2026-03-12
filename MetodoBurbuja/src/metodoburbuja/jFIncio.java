@@ -4,6 +4,7 @@
  */
 package metodoburbuja;
 
+import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -20,6 +21,7 @@ public class jFIncio extends javax.swing.JFrame {
     //Constructores
     public jFIncio() {
         initComponents();
+        setLocationRelativeTo(null);
         init();
         
     }
@@ -34,17 +36,44 @@ public class jFIncio extends javax.swing.JFrame {
         
         //Dibujamos los paneles
         
-        for (int i = 0; i <= panelOriginal.length; i++) {
+        for (int i = 0; i < panelOriginal.length; i++) {
             panelOriginal[i]=new JTextField();
-            panelOriginal[i].setBounds(100,20+(i*10),10,10);
+            panelOriginal[i].setBounds(170,100+(i*40),40,40);
             add(panelOriginal[i]);
             panelOriginal[i].setVisible(true);
             
             panelOrdenado[i]=new JTextField();
-            panelOrdenado[i].setBounds(130,20+(i*10),10,10);
+            panelOrdenado[i].setBounds(220,100+(i*40),40,40);
             add(panelOrdenado[i]);
             panelOrdenado[i].setVisible(true);
         }
+        
+        //Le damos valor random de 0 a 10.
+        Random rand=new Random();
+        int [] num=new int[panelOriginal.length];
+        int [] numOrde=new int[panelOriginal.length];
+        
+        
+        for (int i = 0; i < num.length; i++) {
+            num[i]=rand.nextInt(10);
+        }
+        numOrde=num;
+        
+        for (int i = 0; i < panelOriginal.length; i++) {
+            panelOriginal[i].setText(num[i]+"");
+            //panelOrdenado[i].setText(num[i]+"");
+        }
+        
+        for (int i = 0; i < panelOrdenado.length -1; i++) {
+            if (numOrde[i]<numOrde[i+1]) {
+                int temp=numOrde[i];
+                numOrde[i]=numOrde[i+1];
+                numOrde[i+1]=temp;
+            }
+            panelOrdenado[i].setText(numOrde[i]+"");
+        }
+        
+
     }
     
     /**
@@ -57,7 +86,17 @@ public class jFIncio extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
