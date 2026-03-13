@@ -20,15 +20,19 @@ public class jFIncio extends javax.swing.JFrame {
 
     //Constructores
     public jFIncio() {
+        
         initComponents();
         setLocationRelativeTo(null);
         init();
+        
         
     }
     
     public void init(){
         String inputValue = JOptionPane.showInputDialog("Please input a value");
-        
+        final int ancho=40;
+        final int alto=40;
+        final int disInicio=50;
         //Inicializamos los paneles
         
         panelOriginal = new JTextField[Integer.parseInt(inputValue)];
@@ -38,15 +42,19 @@ public class jFIncio extends javax.swing.JFrame {
         
         for (int i = 0; i < panelOriginal.length; i++) {
             panelOriginal[i]=new JTextField();
-            panelOriginal[i].setBounds(170,100+(i*40),40,40);
+            panelOriginal[i].setBounds(170,disInicio+(i*alto),ancho,alto);
             add(panelOriginal[i]);
             panelOriginal[i].setVisible(true);
             
             panelOrdenado[i]=new JTextField();
-            panelOrdenado[i].setBounds(220,100+(i*40),40,40);
+            panelOrdenado[i].setBounds(220,disInicio+(i*alto),ancho,alto);
             add(panelOrdenado[i]);
             panelOrdenado[i].setVisible(true);
         }
+        
+        this.setSize(300, panelOriginal.length*alto+disInicio*2);
+        
+        
         
         //Le damos valor random de 0 a 10.
         Random rand=new Random();
@@ -61,19 +69,24 @@ public class jFIncio extends javax.swing.JFrame {
         
         for (int i = 0; i < panelOriginal.length; i++) {
             panelOriginal[i].setText(num[i]+"");
-            //panelOrdenado[i].setText(num[i]+"");
+            panelOrdenado[i].setText(num[i]+"");
         }
-        
-        for (int i = 0; i < panelOrdenado.length -1; i++) {
-            if (numOrde[i]<numOrde[i+1]) {
-                int temp=numOrde[i];
-                numOrde[i]=numOrde[i+1];
-                numOrde[i+1]=temp;
+       
+    }
+    
+    private void burbuja(){
+        for (int i = 0; i < panelOrdenado.length; i++) {
+            for (int j = 0; j < panelOrdenado.length-1; j++) {
+                int sValor;
+                int sValor2;
+                sValor=Integer.parseInt(panelOrdenado[i].getText());
+                sValor2=Integer.parseInt(panelOrdenado[i+1].getText());
+                if (sValor>sValor2) {
+                    panelOrdenado[i+1].setText(sValor+"");
+                    panelOrdenado[i].setText(sValor2+"");
+                }
             }
-            panelOrdenado[i].setText(numOrde[i]+"");
         }
-        
-
     }
     
     /**
@@ -85,21 +98,22 @@ public class jFIncio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jBInicio = new javax.swing.JButton();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
+
+        jBInicio.setText("Inicio");
+        jBInicio.addActionListener(this::jBInicioActionPerformed);
+        getContentPane().add(jBInicio);
+        jBInicio.setBounds(23, 45, 72, 23);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInicioActionPerformed
+        burbuja();
+    }//GEN-LAST:event_jBInicioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -128,5 +142,6 @@ public class jFIncio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBInicio;
     // End of variables declaration//GEN-END:variables
 }
