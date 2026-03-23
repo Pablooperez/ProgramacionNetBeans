@@ -20,7 +20,7 @@ public class jFIncio extends javax.swing.JFrame {
 
     //Constructores
     public jFIncio() {
-        
+        setTitle("Método Burbuja");
         initComponents();
         setLocationRelativeTo(null);
         init();
@@ -29,7 +29,7 @@ public class jFIncio extends javax.swing.JFrame {
     }
     
     public void init(){
-        String inputValue = JOptionPane.showInputDialog("Please input a value");
+        String inputValue = JOptionPane.showInputDialog("¿Cuantos números quieres?");
         final int ancho=40;
         final int alto=40;
         final int disInicio=50;
@@ -49,14 +49,14 @@ public class jFIncio extends javax.swing.JFrame {
             panelOrdenado[i]=new JTextField();
             panelOrdenado[i].setBounds(220,disInicio+(i*alto),ancho,alto);
             add(panelOrdenado[i]);
-            panelOrdenado[i].setVisible(true);
+            panelOrdenado[i].setVisible(false);
         }
         
         this.setSize(300, panelOriginal.length*alto+disInicio*2);
         
         
         
-        //Le damos valor random de 0 a 10.
+        //Le damos valor random de 0 a 100.
         Random rand=new Random();
         
         int [] num=new int[panelOriginal.length];
@@ -73,7 +73,9 @@ public class jFIncio extends javax.swing.JFrame {
     }
     
     private void burbuja(){
+        
         for (int i = 0; i < panelOrdenado.length; i++) {
+            panelOrdenado[i].setVisible(true);
             for (int j = 0; j < panelOrdenado.length-1; j++) {
                 int sValor;
                 int sValor2;
@@ -85,6 +87,7 @@ public class jFIncio extends javax.swing.JFrame {
                 }
             }
         }
+        
         
         
         
@@ -104,10 +107,10 @@ public class jFIncio extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        jBInicio.setText("Inicio");
+        jBInicio.setText("Ordenar ");
         jBInicio.addActionListener(this::jBInicioActionPerformed);
         getContentPane().add(jBInicio);
-        jBInicio.setBounds(23, 45, 72, 23);
+        jBInicio.setBounds(23, 45, 130, 130);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

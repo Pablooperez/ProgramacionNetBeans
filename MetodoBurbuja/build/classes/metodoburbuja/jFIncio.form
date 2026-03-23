@@ -27,14 +27,14 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="jBInicio">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Inicio"/>
+        <Property name="text" type="java.lang.String" value="Ordenar "/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBInicioActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="23" y="45" width="-1" height="-1"/>
+          <AbsoluteConstraints x="23" y="45" width="130" height="130"/>
         </Constraint>
       </Constraints>
     </Component>
