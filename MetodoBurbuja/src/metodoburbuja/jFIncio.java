@@ -79,7 +79,7 @@ public class jFIncio extends javax.swing.JFrame {
        
     }
     
-    public void burbuja(){
+    public void ordenar(){
         
         for (int i = 0; i < panelOrdenado.length; i++) {
             panelOrdenado[i].setVisible(true);
@@ -161,7 +161,7 @@ public class jFIncio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInicioActionPerformed
-        burbuja();
+        ordenar();
     }//GEN-LAST:event_jBInicioActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
