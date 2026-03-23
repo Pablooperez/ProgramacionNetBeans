@@ -4,6 +4,10 @@
  */
 package metodoburbuja;
 
+
+
+import java.awt.Color;
+import static java.awt.Color.white;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -24,6 +28,7 @@ public class jFIncio extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         init();
+        setLocationRelativeTo(null);
         
         
     }
@@ -50,6 +55,8 @@ public class jFIncio extends javax.swing.JFrame {
             panelOrdenado[i].setBounds(220,disInicio+(i*alto),ancho,alto);
             add(panelOrdenado[i]);
             panelOrdenado[i].setVisible(false);
+            
+            panelOrdenado[i].setBackground(Color.decode("#71c4ef"));
         }
         
         this.setSize(300, panelOriginal.length*alto+disInicio*2);
@@ -72,10 +79,11 @@ public class jFIncio extends javax.swing.JFrame {
        
     }
     
-    private void burbuja(){
+    public void burbuja(){
         
         for (int i = 0; i < panelOrdenado.length; i++) {
             panelOrdenado[i].setVisible(true);
+            panelOrdenado[i].setBackground(Color.decode("#71c4ef"));
             for (int j = 0; j < panelOrdenado.length-1; j++) {
                 int sValor;
                 int sValor2;
@@ -86,12 +94,34 @@ public class jFIncio extends javax.swing.JFrame {
                     panelOrdenado[j].setText(sValor2+"");
                 }
             }
+        }         
+    }
+    
+    public void resetear(){
+        for (int i = 0; i < panelOrdenado.length; i++) {
+            panelOrdenado[i].setText(panelOriginal[i].getText());
+            panelOrdenado[i].setBackground(white);
+        }
+    }
+    
+    public void nuevo(){
+        Random rand=new Random();
+        
+        int [] num1=new int[panelOriginal.length];
+            
+        for (int i = 0; i < num1.length; i++) {
+            num1[i]=rand.nextInt(100);
         }
         
-        
-        
-        
+        for (int i = 0; i < panelOriginal.length; i++) {
+            panelOrdenado[i].setBackground(white);
+            panelOriginal[i].setText(num1[i]+"");
+            panelOrdenado[i].setText(num1[i]+"");
+        }
+           
     }
+    
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -103,14 +133,29 @@ public class jFIncio extends javax.swing.JFrame {
     private void initComponents() {
 
         jBInicio = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
+        jBInicio.setBackground(new java.awt.Color(0, 119, 194));
         jBInicio.setText("Ordenar ");
         jBInicio.addActionListener(this::jBInicioActionPerformed);
         getContentPane().add(jBInicio);
         jBInicio.setBounds(23, 45, 130, 130);
+
+        jButton1.setBackground(new java.awt.Color(89, 165, 242));
+        jButton1.setText("Resetear");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
+        getContentPane().add(jButton1);
+        jButton1.setBounds(23, 180, 130, 23);
+
+        jButton2.setBackground(new java.awt.Color(200, 255, 255));
+        jButton2.setText("Nuevo");
+        jButton2.addActionListener(this::jButton2ActionPerformed);
+        getContentPane().add(jButton2);
+        jButton2.setBounds(23, 210, 130, 23);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -118,6 +163,14 @@ public class jFIncio extends javax.swing.JFrame {
     private void jBInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInicioActionPerformed
         burbuja();
     }//GEN-LAST:event_jBInicioActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        resetear();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        nuevo();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,5 +200,7 @@ public class jFIncio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBInicio;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     // End of variables declaration//GEN-END:variables
 }
