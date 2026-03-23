@@ -58,14 +58,12 @@ public class jFIncio extends javax.swing.JFrame {
         
         //Le damos valor random de 0 a 10.
         Random rand=new Random();
+        
         int [] num=new int[panelOriginal.length];
-        int [] numOrde=new int[panelOriginal.length];
-        
-        
+            
         for (int i = 0; i < num.length; i++) {
             num[i]=rand.nextInt(100);
         }
-        numOrde=num;
         
         for (int i = 0; i < panelOriginal.length; i++) {
             panelOriginal[i].setText(num[i]+"");
