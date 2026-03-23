@@ -4,17 +4,59 @@
  */
 package gestortareas;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 /**
  *
  * @author casa
  */
 public class GestorTareas {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    
+    //Atributos
+    
+    private List<Tarea> listaTareas;
+    
+    //Constructor
+    
+    public GestorTareas(){
+        this.listaTareas = new ArrayList<>();
     }
     
+    //Métodos
+    
+    public void añadirTarea(Tarea tarea){
+        listaTareas.add(tarea);
+    }
+    
+    public void eliminarTarea(Tarea tarea){
+        listaTareas.remove(tarea);
+    }
+    
+    public void editarTarea(Tarea tarea, String nuevoNombre, Tarea.Prioridad nuevaPrioridad){
+        tarea.setNombre(nuevoNombre);
+        tarea.setPrioridad(nuevaPrioridad);
+    }
+    
+    public void ordenarPorPrioridad(){
+        listaTareas.sort(Comparator.comparing(Tarea::getPrioridad).reversed());
+    }
+    
+    public List<Tarea> filtrarCompletadas(){
+        List<Tarea> resultado = new ArrayList<>();
+        for (Tarea t : listaTareas){
+            if (t.isCompletada()) {
+                resultado.add(t);
+            }
+        }
+        return resultado;
+    }
+    
+    
+    
+    
+        
 }
+    
+
