@@ -63,7 +63,7 @@ public class jFIncio extends javax.swing.JFrame {
         
         
         for (int i = 0; i < num.length; i++) {
-            num[i]=rand.nextInt(10);
+            num[i]=rand.nextInt(100);
         }
         numOrde=num;
         
@@ -79,14 +79,17 @@ public class jFIncio extends javax.swing.JFrame {
             for (int j = 0; j < panelOrdenado.length-1; j++) {
                 int sValor;
                 int sValor2;
-                sValor=Integer.parseInt(panelOrdenado[i].getText());
-                sValor2=Integer.parseInt(panelOrdenado[i+1].getText());
+                sValor=Integer.parseInt(panelOrdenado[j].getText());
+                sValor2=Integer.parseInt(panelOrdenado[j+1].getText());
                 if (sValor>sValor2) {
-                    panelOrdenado[i+1].setText(sValor+"");
-                    panelOrdenado[i].setText(sValor2+"");
+                    panelOrdenado[j+1].setText(sValor+"");
+                    panelOrdenado[j].setText(sValor2+"");
                 }
             }
         }
+        
+        
+        
     }
     
     /**
