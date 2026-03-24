@@ -21,7 +21,7 @@ public class Tarea {
     private String nombre;
     private Prioridad prioridad;
     private boolean completada;
-    private LocalDate fechaCreacion;
+    private final LocalDate fechaCreacion;
     
     // Constructores
     
@@ -67,7 +67,7 @@ public class Tarea {
     public void marcarComoCompletada(){
         if (!this.completada) {
             this.completada=true;
-            System.out.println("Tarea completada: " + this.nombre);
+            
         }
         
     }
@@ -75,22 +75,22 @@ public class Tarea {
     public void marcarComoIncompleta(){
         if (this.completada) {
             this.completada=false;
-            System.out.println("Tarea incompleta: " + this.nombre);
+            
         }
     }
     
     public void cambiarPrioridad(Prioridad nueva){
         if (nueva==this.prioridad) {
-            System.out.println("Error, misma prioridad.");
+            
         }else{
             this.prioridad=nueva;
-            System.out.println("Prioridad cambiada: " + this.nombre + " -- " + this.prioridad);
+            
         }
     }
     
     @Override
     public String toString(){
-        return "[Tarea] " + this.nombre + " - " + this.prioridad + " - " + (this.completada ? "Completada" : "Pendiente") 
+        return  this.nombre + " - " + this.prioridad + " - " + (this.completada ? "Completada" : "Pendiente") 
                 + " -  " + this.fechaCreacion;
     }
     

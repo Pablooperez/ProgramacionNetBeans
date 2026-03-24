@@ -53,6 +53,34 @@ public class GestorTareas {
         return resultado;
     }
     
+    public List<Tarea> filtrarIncompletas(){
+        List<Tarea> resultado = new ArrayList<>();
+        for(Tarea t : listaTareas){
+            if(!t.isCompletada()){
+                resultado.add(t);
+            }
+        }
+        return resultado;
+    }
+    
+    public List<Tarea> filtrarPorPrioridad(Tarea.Prioridad p){
+        List<Tarea> resultado = new ArrayList<>();
+        for(Tarea t : listaTareas){
+            if (t.getPrioridad() == p ) {
+                resultado.add(t);
+            }
+        }
+        return resultado;
+    }
+    
+    public List<Tarea> mostrarTodas(){
+        List<Tarea> resultado = new ArrayList<>();
+        for(Tarea t : listaTareas){
+            resultado.add(t);
+        }
+        return resultado;
+    }
+    
     
     
     
