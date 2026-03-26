@@ -81,11 +81,11 @@ public class jFIncio extends javax.swing.JFrame {
        
     }
     
-    public void ordenar(){
+    public void ordenarAlaBaja(){
         
-        for (int i = 0; i < panelOrdenado.length; i++) {
-            panelOrdenado[i].setVisible(true);
-            panelOrdenado[i].setBackground(Color.decode("#71c4ef"));
+        for (JTextField panelOrdenado1 : panelOrdenado) {
+            panelOrdenado1.setVisible(true);
+            panelOrdenado1.setBackground(Color.decode("#71c4ef"));
             for (int j = 0; j < panelOrdenado.length-1; j++) {
                 int sValor;
                 int sValor2;
@@ -190,7 +190,7 @@ public class jFIncio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBOrdenarALaBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBOrdenarALaBajaActionPerformed
-        ordenar();
+        ordenarAlaBaja();
     }//GEN-LAST:event_jBOrdenarALaBajaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
