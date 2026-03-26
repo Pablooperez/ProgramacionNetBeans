@@ -99,10 +99,28 @@ public class jFIncio extends javax.swing.JFrame {
         }         
     }
     
+    public void ordenarAlaAlta(){
+        for (int i = 0; i < panelOrdenado.length; i++) {
+            panelOrdenado[i].setVisible(true);
+            panelOrdenado[i].setBackground(Color.decode("#71c4ef"));
+            for (int j = 0; j < panelOrdenado.length-1; j++) {
+                int sValor;
+                int sValor2;
+                sValor=Integer.parseInt(panelOrdenado[j].getText());
+                sValor2=Integer.parseInt(panelOrdenado[j+1].getText());
+                if (sValor<sValor2) {
+                    panelOrdenado[j+1].setText(sValor+"");
+                    panelOrdenado[j].setText(sValor2+"");
+                }
+            }
+        } 
+    }
+    
     public void resetear(){
         for (int i = 0; i < panelOrdenado.length; i++) {
             panelOrdenado[i].setText(panelOriginal[i].getText());
             panelOrdenado[i].setBackground(white);
+            panelOrdenado[i].setVisible(false);
         }
     }
     
@@ -119,6 +137,7 @@ public class jFIncio extends javax.swing.JFrame {
             panelOrdenado[i].setBackground(white);
             panelOriginal[i].setText(num1[i]+"");
             panelOrdenado[i].setText(num1[i]+"");
+            panelOrdenado[i].setVisible(false);
         }
            
     }
@@ -134,37 +153,45 @@ public class jFIncio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jBInicio = new javax.swing.JButton();
+        jBOrdenarALaBaja = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jBOrdenarALaAlta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        jBInicio.setBackground(new java.awt.Color(0, 119, 194));
-        jBInicio.setText("Ordenar ");
-        jBInicio.addActionListener(this::jBInicioActionPerformed);
-        getContentPane().add(jBInicio);
-        jBInicio.setBounds(23, 45, 130, 130);
+        jBOrdenarALaBaja.setBackground(new java.awt.Color(0, 119, 194));
+        jBOrdenarALaBaja.setText("Ordenar a la baja");
+        jBOrdenarALaBaja.addActionListener(this::jBOrdenarALaBajaActionPerformed);
+        getContentPane().add(jBOrdenarALaBaja);
+        jBOrdenarALaBaja.setBounds(30, 50, 130, 40);
 
         jButton1.setBackground(new java.awt.Color(89, 165, 242));
         jButton1.setText("Resetear");
         jButton1.addActionListener(this::jButton1ActionPerformed);
         getContentPane().add(jButton1);
-        jButton1.setBounds(23, 180, 130, 23);
+        jButton1.setBounds(30, 150, 130, 23);
 
         jButton2.setBackground(new java.awt.Color(200, 255, 255));
         jButton2.setText("Nuevo");
         jButton2.addActionListener(this::jButton2ActionPerformed);
         getContentPane().add(jButton2);
-        jButton2.setBounds(23, 210, 130, 23);
+        jButton2.setBounds(30, 180, 130, 23);
+
+        jBOrdenarALaAlta.setBackground(new java.awt.Color(0, 102, 140));
+        jBOrdenarALaAlta.setText("Ordenar a la alta");
+        jBOrdenarALaAlta.setPreferredSize(new java.awt.Dimension(119, 23));
+        jBOrdenarALaAlta.addActionListener(this::jBOrdenarALaAltaActionPerformed);
+        getContentPane().add(jBOrdenarALaAlta);
+        jBOrdenarALaAlta.setBounds(30, 100, 130, 40);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInicioActionPerformed
+    private void jBOrdenarALaBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBOrdenarALaBajaActionPerformed
         ordenar();
-    }//GEN-LAST:event_jBInicioActionPerformed
+    }//GEN-LAST:event_jBOrdenarALaBajaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         resetear();        // TODO add your handling code here:
@@ -173,6 +200,10 @@ public class jFIncio extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         nuevo();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jBOrdenarALaAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBOrdenarALaAltaActionPerformed
+       ordenarAlaAlta();
+    }//GEN-LAST:event_jBOrdenarALaAltaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,7 +232,8 @@ public class jFIncio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBInicio;
+    private javax.swing.JButton jBOrdenarALaAlta;
+    private javax.swing.JButton jBOrdenarALaBaja;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     // End of variables declaration//GEN-END:variables
