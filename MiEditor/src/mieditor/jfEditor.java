@@ -5,6 +5,9 @@
 package mieditor;
 
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  *
@@ -38,10 +41,15 @@ public class jfEditor extends javax.swing.JFrame {
         jtflArchivoIn = new javax.swing.JTextField();
         jtflArchivoOut = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jtContenidoArchivoIn = new javax.swing.JTextArea();
         jbSalir = new javax.swing.JButton();
         jbIsArchivo = new javax.swing.JButton();
         jbIsDirectorio = new javax.swing.JButton();
+        jbVerArchivoIn = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jtContenidoArchivoOut = new javax.swing.JTextArea();
+        jbVerArchivoOut = new javax.swing.JButton();
+        jbProcesar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,11 +61,11 @@ public class jfEditor extends javax.swing.JFrame {
 
         jtflArchivoIn.setText("./archivos/prueba.txt");
 
-        jtflArchivoOut.setText("jTextField2");
+        jtflArchivoOut.setText("./archivos/prueba copia.txt");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jtContenidoArchivoIn.setColumns(20);
+        jtContenidoArchivoIn.setRows(5);
+        jScrollPane1.setViewportView(jtContenidoArchivoIn);
 
         jbSalir.setText("Salir");
 
@@ -67,54 +75,87 @@ public class jfEditor extends javax.swing.JFrame {
         jbIsDirectorio.setText("Es directorio?");
         jbIsDirectorio.addActionListener(this::jbIsDirectorioActionPerformed);
 
+        jbVerArchivoIn.setText("Ver");
+        jbVerArchivoIn.addActionListener(this::jbVerArchivoInActionPerformed);
+
+        jtContenidoArchivoOut.setColumns(20);
+        jtContenidoArchivoOut.setRows(5);
+        jScrollPane2.setViewportView(jtContenidoArchivoOut);
+
+        jbVerArchivoOut.setText("Ver");
+        jbVerArchivoOut.addActionListener(this::jbVerArchivoOutActionPerformed);
+
+        jbProcesar.setText("Procesar");
+        jbProcesar.addActionListener(this::jbProcesarActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jtflArchivoOut))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jtflArchivoIn, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jbIsArchivo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbIsDirectorio)))
-                        .addGap(0, 35, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jtflArchivoIn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jbVerArchivoIn, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jtflArchivoOut, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jbVerArchivoOut, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jbIsArchivo)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbIsDirectorio)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(272, 272, 272)
+                .addComponent(jbProcesar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jtflArchivoIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbProcesar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jtflArchivoIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbVerArchivoIn)
                     .addComponent(jLabel3)
-                    .addComponent(jtflArchivoOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtflArchivoOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbVerArchivoOut))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbIsArchivo)
                     .addComponent(jbIsDirectorio))
-                .addGap(4, 4, 4)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbSalir)
                 .addContainerGap())
         );
@@ -125,9 +166,9 @@ public class jfEditor extends javax.swing.JFrame {
     private void jbIsArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIsArchivoActionPerformed
         archivoIN = new File(jtflArchivoIn.getText());
         if (archivoIN.exists()) {
-            jTextArea1.append("Es una Archivo?: "+archivoIN.isFile()+"\n");
+            jtContenidoArchivoIn.append("Es una Archivo?: "+archivoIN.isFile()+"\n");
         }else{
-            jTextArea1.append("No existe");
+            jtContenidoArchivoIn.append("No existe");
         }
         
     }//GEN-LAST:event_jbIsArchivoActionPerformed
@@ -135,12 +176,104 @@ public class jfEditor extends javax.swing.JFrame {
     private void jbIsDirectorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIsDirectorioActionPerformed
         archivoIN = new File(jtflArchivoIn.getText());
         if (archivoIN.exists()) {
-            jTextArea1.append("Es un Directorio?: "+archivoIN.isDirectory()+"\n");
+            jtContenidoArchivoIn.append("Es un Directorio?: "+archivoIN.isDirectory()+"\n");
         }else{
-            jTextArea1.append("No existe");
+            jtContenidoArchivoIn.append("No existe");
         }
         
     }//GEN-LAST:event_jbIsDirectorioActionPerformed
+
+    private void jbProcesarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbProcesarActionPerformed
+        String nombreArchivoIn;
+        String nombreArchivoOut;
+        nombreArchivoIn = jtflArchivoIn.getText();
+        nombreArchivoOut = jtflArchivoOut.getText();
+        jtContenidoArchivoIn.setText("");
+        jtContenidoArchivoOut.setText("");
+        
+        try {
+            FileReader archR = new FileReader(nombreArchivoIn);
+            FileWriter archW = new FileWriter(nombreArchivoOut);
+            
+            int valor = archR.read();
+            
+            while(valor!=-1){
+                
+                jtContenidoArchivoIn.append(String.valueOf((char)valor));
+                
+                archW.write(valor);
+                valor = archR.read();
+                
+            }
+            archR.close();
+            archW.close();
+            
+            
+        } catch(IOException e){
+            jtContenidoArchivoIn.setText("Error E/S: " + e);
+            
+        }
+        
+        try {
+            FileReader archR2 = new FileReader(nombreArchivoOut);
+            int valor2 = archR2.read();
+            
+            while(valor2!=-1){
+                jtContenidoArchivoOut.append(String.valueOf((char)valor2));
+                valor2 = archR2.read();
+            }
+            archR2.close();
+        }catch(IOException e){
+            jtContenidoArchivoOut.setText("Error E/S: " + e);
+        }
+        
+        
+    }//GEN-LAST:event_jbProcesarActionPerformed
+
+    private void jbVerArchivoInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVerArchivoInActionPerformed
+        jtContenidoArchivoIn.setText("");
+        String nombreArchivoIn;
+        nombreArchivoIn = jtflArchivoIn.getText();
+        
+        
+        try {
+            FileReader archR = new FileReader(nombreArchivoIn);
+            
+            int valor = archR.read();
+            
+            while(valor!=-1){
+                
+                jtContenidoArchivoIn.append(String.valueOf((char)valor));
+               
+                valor = archR.read();
+                
+            }
+            archR.close();
+            
+        } catch(IOException e){
+            jtContenidoArchivoIn.setText("Error E/S: " + e);
+            
+        }
+    }//GEN-LAST:event_jbVerArchivoInActionPerformed
+
+    private void jbVerArchivoOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVerArchivoOutActionPerformed
+        jtContenidoArchivoOut.setText("");
+        String nombreArchivoOut;
+        nombreArchivoOut = jtflArchivoOut.getText();
+        
+        try {
+            FileReader archR2 = new FileReader(nombreArchivoOut);
+            int valor2 = archR2.read();
+            
+            while(valor2!=-1){
+                jtContenidoArchivoOut.append(String.valueOf((char)valor2));
+                valor2 = archR2.read();
+            }
+            archR2.close();
+        }catch(IOException e){
+            jtContenidoArchivoOut.setText("Error E/S: " + e);
+        }
+    }//GEN-LAST:event_jbVerArchivoOutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,10 +305,15 @@ public class jfEditor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jbIsArchivo;
     private javax.swing.JButton jbIsDirectorio;
+    private javax.swing.JButton jbProcesar;
     private javax.swing.JButton jbSalir;
+    private javax.swing.JButton jbVerArchivoIn;
+    private javax.swing.JButton jbVerArchivoOut;
+    private javax.swing.JTextArea jtContenidoArchivoIn;
+    private javax.swing.JTextArea jtContenidoArchivoOut;
     private javax.swing.JTextField jtflArchivoIn;
     private javax.swing.JTextField jtflArchivoOut;
     // End of variables declaration//GEN-END:variables
