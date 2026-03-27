@@ -204,10 +204,20 @@ public class jfEditor extends javax.swing.JFrame {
         String nombreArchivoOut;
         nombreArchivoIn = jtflArchivoIn.getText();
         nombreArchivoOut = jtflArchivoOut.getText();
+        File archivo = new File(nombreArchivoOut);
         jtContenidoArchivoIn.setText("");
         jtContenidoArchivoOut.setText("");
         
-        if (jtflArchivoIn.getText().contains(".txt")) {
+        if (!archivo.exists()) {
+            try{
+                archivo.createNewFile();
+            }catch(IOException e){
+                jtContenidoArchivoOut.setText("Error E/S: " + e);
+            }
+            
+        }else{
+            
+            if (jtflArchivoIn.getText().contains(".txt")) {
             try {
             FileReader archR = new FileReader(nombreArchivoIn);
             FileWriter archW = new FileWriter(nombreArchivoOut);
@@ -268,6 +278,10 @@ public class jfEditor extends javax.swing.JFrame {
             
             }
         }
+            
+        }
+        
+        
         
         
     }//GEN-LAST:event_jbProcesarActionPerformed
