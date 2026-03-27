@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -17,6 +18,7 @@ public class jfEditor extends javax.swing.JFrame {
     //Declaraciones
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(jfEditor.class.getName());
     File archivoIN;
+ 
     
     
     
@@ -24,6 +26,7 @@ public class jfEditor extends javax.swing.JFrame {
 //CONSTRUCTORES   
     public jfEditor() {
         initComponents();
+        setTitle("PROCESADOR DE TEXTO");
     }
 
     /**
@@ -50,18 +53,18 @@ public class jfEditor extends javax.swing.JFrame {
         jtContenidoArchivoOut = new javax.swing.JTextArea();
         jbVerArchivoOut = new javax.swing.JButton();
         jbProcesar = new javax.swing.JButton();
+        jbSeleccionarArchivoIn = new javax.swing.JButton();
+        jbSeleccionarArchivoOut = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setText("PROCESADOR DE TEXTO");
 
         jLabel2.setText("Archivo In: ");
 
         jLabel3.setText("Archivo Out:");
 
-        jtflArchivoIn.setText("./archivos/prueba.txt");
-
-        jtflArchivoOut.setText("./archivos/prueba copia.txt");
+        jtflArchivoOut.addActionListener(this::jtflArchivoOutActionPerformed);
 
         jtContenidoArchivoIn.setColumns(20);
         jtContenidoArchivoIn.setRows(5);
@@ -88,6 +91,12 @@ public class jfEditor extends javax.swing.JFrame {
         jbProcesar.setText("Procesar");
         jbProcesar.addActionListener(this::jbProcesarActionPerformed);
 
+        jbSeleccionarArchivoIn.setText("...");
+        jbSeleccionarArchivoIn.addActionListener(this::jbSeleccionarArchivoInActionPerformed);
+
+        jbSeleccionarArchivoOut.setText("...");
+        jbSeleccionarArchivoOut.addActionListener(this::jbSeleccionarArchivoOutActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,56 +106,61 @@ public class jfEditor extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jtflArchivoIn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jbSeleccionarArchivoIn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jbVerArchivoIn, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1))
+                                .addGap(34, 34, 34)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
                                         .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jtflArchivoOut, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jbVerArchivoOut, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jtflArchivoOut, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                        .addComponent(jbSeleccionarArchivoOut, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jbVerArchivoOut, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane2)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(281, 281, 281)
+                                .addComponent(jLabel1))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(321, 321, 321)
+                        .addComponent(jbProcesar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(jbIsArchivo)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbIsDirectorio)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(272, 272, 272)
-                .addComponent(jbProcesar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jbSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jbIsArchivo)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbIsDirectorio)))))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbProcesar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jtflArchivoIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbVerArchivoIn)
                     .addComponent(jLabel3)
                     .addComponent(jtflArchivoOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbVerArchivoOut))
+                    .addComponent(jbVerArchivoOut)
+                    .addComponent(jbSeleccionarArchivoIn)
+                    .addComponent(jbSeleccionarArchivoOut))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
@@ -275,6 +289,27 @@ public class jfEditor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jbVerArchivoOutActionPerformed
 
+    private void jbSeleccionarArchivoInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSeleccionarArchivoInActionPerformed
+        JFileChooser chooser =  new JFileChooser();
+        int returnVal = chooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            jtflArchivoIn.setText(chooser.getSelectedFile().getPath());
+        }
+        
+    }//GEN-LAST:event_jbSeleccionarArchivoInActionPerformed
+
+    private void jtflArchivoOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtflArchivoOutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtflArchivoOutActionPerformed
+
+    private void jbSeleccionarArchivoOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSeleccionarArchivoOutActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        int returnVal = chooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            jtflArchivoOut.setText(chooser.getSelectedFile().getPath());
+        }
+    }//GEN-LAST:event_jbSeleccionarArchivoOutActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -310,6 +345,8 @@ public class jfEditor extends javax.swing.JFrame {
     private javax.swing.JButton jbIsDirectorio;
     private javax.swing.JButton jbProcesar;
     private javax.swing.JButton jbSalir;
+    public javax.swing.JButton jbSeleccionarArchivoIn;
+    private javax.swing.JButton jbSeleccionarArchivoOut;
     private javax.swing.JButton jbVerArchivoIn;
     private javax.swing.JButton jbVerArchivoOut;
     private javax.swing.JTextArea jtContenidoArchivoIn;
