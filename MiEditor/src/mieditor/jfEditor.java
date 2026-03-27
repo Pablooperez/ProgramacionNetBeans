@@ -5,6 +5,8 @@
 package mieditor;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -205,7 +207,8 @@ public class jfEditor extends javax.swing.JFrame {
         jtContenidoArchivoIn.setText("");
         jtContenidoArchivoOut.setText("");
         
-        try {
+        if (jtflArchivoIn.getText().contains(".txt")) {
+            try {
             FileReader archR = new FileReader(nombreArchivoIn);
             FileWriter archW = new FileWriter(nombreArchivoOut);
             
@@ -223,12 +226,11 @@ public class jfEditor extends javax.swing.JFrame {
             archW.close();
             
             
-        } catch(IOException e){
-            jtContenidoArchivoIn.setText("Error E/S: " + e);
-            
-        }
+            }catch(IOException e){
+            jtContenidoArchivoIn.setText("Error E/S: " + e); 
+            }
         
-        try {
+            try {
             FileReader archR2 = new FileReader(nombreArchivoOut);
             int valor2 = archR2.read();
             
@@ -237,8 +239,34 @@ public class jfEditor extends javax.swing.JFrame {
                 valor2 = archR2.read();
             }
             archR2.close();
-        }catch(IOException e){
+            }catch(IOException e){
             jtContenidoArchivoOut.setText("Error E/S: " + e);
+            }
+        }
+        
+        
+        
+        if (jtflArchivoIn.getText().contains(".jpg")) {
+            try {
+            FileInputStream archRB = new FileInputStream(nombreArchivoIn);
+            FileOutputStream archWB = new FileOutputStream(nombreArchivoOut);
+            
+            int valor = archRB.read();
+            
+            while(valor!=-1){
+                
+                archWB.write(valor);
+               
+                valor = archRB.read();
+                
+            }
+            archRB.close();
+            archWB.close();
+            
+            } catch(IOException e){
+            jtContenidoArchivoIn.setText("Error E/S: " + e);
+            
+            }
         }
         
         
@@ -247,10 +275,12 @@ public class jfEditor extends javax.swing.JFrame {
     private void jbVerArchivoInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVerArchivoInActionPerformed
         jtContenidoArchivoIn.setText("");
         String nombreArchivoIn;
+        String nombreArchivoOut;
         nombreArchivoIn = jtflArchivoIn.getText();
+        nombreArchivoOut = jtflArchivoOut.getText();
         
-        
-        try {
+        if (jtflArchivoIn.getText().contains(".txt")) {
+            try {
             FileReader archR = new FileReader(nombreArchivoIn);
             
             int valor = archR.read();
@@ -264,10 +294,35 @@ public class jfEditor extends javax.swing.JFrame {
             }
             archR.close();
             
-        } catch(IOException e){
+            } catch(IOException e){
             jtContenidoArchivoIn.setText("Error E/S: " + e);
             
+            }
         }
+        
+        if (jtflArchivoIn.getText().contains(".jpg")) {
+            try {
+            FileInputStream archRB = new FileInputStream(nombreArchivoIn);
+            FileOutputStream archWB = new FileOutputStream(nombreArchivoOut);
+            
+            int valor = archRB.read();
+            
+            while(valor!=-1){
+                
+                archWB.write(valor);
+               
+                valor = archRB.read();
+                
+            }
+            archRB.close();
+            archWB.close();
+            
+            } catch(IOException e){
+            jtContenidoArchivoIn.setText("Error E/S: " + e);
+            
+            }
+        }
+          
     }//GEN-LAST:event_jbVerArchivoInActionPerformed
 
     private void jbVerArchivoOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVerArchivoOutActionPerformed
