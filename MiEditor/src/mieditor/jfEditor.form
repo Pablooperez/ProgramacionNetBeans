@@ -37,9 +37,9 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jbSeleccionarArchivoIn" min="-2" pref="43" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jbVerArchivoIn" min="-2" pref="55" max="-2" attributes="0"/>
+                                      <Component id="jbVerArchivoIn" pref="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <Component id="jScrollPane1" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane1" pref="336" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -47,7 +47,7 @@
                                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jtflArchivoOut" min="-2" pref="160" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jbSeleccionarArchivoOut" min="-2" pref="43" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jbVerArchivoOut" min="-2" pref="50" max="-2" attributes="0"/>
@@ -77,7 +77,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="34" max="32767" attributes="0"/>
+              <EmptySpace pref="33" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -89,17 +89,19 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jbProcesar" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jtflArchivoIn" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jbVerArchivoIn" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jtflArchivoOut" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jbVerArchivoOut" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jbSeleccionarArchivoIn" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jbSeleccionarArchivoOut" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtflArchivoIn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtflArchivoOut" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbVerArchivoOut" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbSeleccionarArchivoIn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbSeleccionarArchivoOut" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="jbVerArchivoIn" min="-2" pref="23" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jScrollPane2" pref="171" max="32767" attributes="0"/>
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
@@ -177,7 +179,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jbVerArchivoIn">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ver"/>
+        <Property name="text" type="java.lang.String" value="Leer"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbVerArchivoInActionPerformed"/>
@@ -200,7 +202,7 @@
     </Container>
     <Component class="javax.swing.JButton" name="jbVerArchivoOut">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ver"/>
+        <Property name="text" type="java.lang.String" value="Leer"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbVerArchivoOutActionPerformed"/>

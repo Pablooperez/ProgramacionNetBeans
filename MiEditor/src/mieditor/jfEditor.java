@@ -80,14 +80,14 @@ public class jfEditor extends javax.swing.JFrame {
         jbIsDirectorio.setText("Es directorio?");
         jbIsDirectorio.addActionListener(this::jbIsDirectorioActionPerformed);
 
-        jbVerArchivoIn.setText("Ver");
+        jbVerArchivoIn.setText("Leer");
         jbVerArchivoIn.addActionListener(this::jbVerArchivoInActionPerformed);
 
         jtContenidoArchivoOut.setColumns(20);
         jtContenidoArchivoOut.setRows(5);
         jScrollPane2.setViewportView(jtContenidoArchivoOut);
 
-        jbVerArchivoOut.setText("Ver");
+        jbVerArchivoOut.setText("Leer");
         jbVerArchivoOut.addActionListener(this::jbVerArchivoOutActionPerformed);
 
         jbProcesar.setText("Procesar");
@@ -117,8 +117,8 @@ public class jfEditor extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jbSeleccionarArchivoIn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jbVerArchivoIn, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane1))
+                                        .addComponent(jbVerArchivoIn, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE))
                                 .addGap(34, 34, 34)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
@@ -144,7 +144,7 @@ public class jfEditor extends javax.swing.JFrame {
                                 .addComponent(jbIsArchivo)
                                 .addGap(18, 18, 18)
                                 .addComponent(jbIsDirectorio)))))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,15 +154,16 @@ public class jfEditor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbProcesar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jtflArchivoIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbVerArchivoIn)
-                    .addComponent(jLabel3)
-                    .addComponent(jtflArchivoOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbVerArchivoOut)
-                    .addComponent(jbSeleccionarArchivoIn)
-                    .addComponent(jbSeleccionarArchivoOut))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(jtflArchivoIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)
+                        .addComponent(jtflArchivoOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbVerArchivoOut)
+                        .addComponent(jbSeleccionarArchivoIn)
+                        .addComponent(jbSeleccionarArchivoOut))
+                    .addComponent(jbVerArchivoIn, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
@@ -214,7 +215,6 @@ public class jfEditor extends javax.swing.JFrame {
             }catch(IOException e){
                 jtContenidoArchivoOut.setText("Error E/S: " + e);
             }
-            
         }else{
             
             if (jtflArchivoIn.getText().contains(".txt")) {
