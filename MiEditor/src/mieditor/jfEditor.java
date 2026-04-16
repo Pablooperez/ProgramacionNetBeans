@@ -4,6 +4,8 @@
  */
 package mieditor;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -109,6 +111,7 @@ public class jfEditor extends javax.swing.JFrame {
         jbVerArchivoInBuffer.addActionListener(this::jbVerArchivoInBufferActionPerformed);
 
         jbVerArchivoOutBuffer.setText("Leer ArchivoOut");
+        jbVerArchivoOutBuffer.addActionListener(this::jbVerArchivoOutBufferActionPerformed);
 
         jbProcesarBuffer.setText("Procesar");
         jbProcesarBuffer.addActionListener(this::jbProcesarBufferActionPerformed);
@@ -237,13 +240,14 @@ public class jfEditor extends javax.swing.JFrame {
         jtContenidoArchivoIn.setText("");
         jtContenidoArchivoOut.setText("");
         
-        if (!archivo.exists()) {
+        while (!archivo.exists()) {
             try{
                 archivo.createNewFile();
             }catch(IOException e){
                 jtContenidoArchivoOut.setText("Error E/S: " + e);
             }
-        }else{
+        }
+        
             
             if (jtflArchivoIn.getText().contains(".txt")) {
             try {
@@ -282,8 +286,7 @@ public class jfEditor extends javax.swing.JFrame {
             }
         }
         
-        
-        
+           
         if (jtflArchivoIn.getText().contains(".jpg")) {
             try {
             FileInputStream archRB = new FileInputStream(nombreArchivoIn);
@@ -307,7 +310,7 @@ public class jfEditor extends javax.swing.JFrame {
             }
         }
             
-        }
+    
         
         
         
@@ -342,13 +345,13 @@ public class jfEditor extends javax.swing.JFrame {
             }
         }
         
-        if (jtflArchivoIn.getText().contains(".jpg")) {
+        if (jtflArchivoIn.getText().contains(".jpg")||jtflArchivoIn.getText().contains(".png")) {
             try {
             FileInputStream archRB = new FileInputStream(nombreArchivoIn);
             FileOutputStream archWB = new FileOutputStream(nombreArchivoOut);
             
             int valor = archRB.read();
-            
+            jtContenidoArchivoIn.setText("El archivo se está copiando");
             while(valor!=-1){
                 
                 archWB.write(valor);
@@ -356,6 +359,7 @@ public class jfEditor extends javax.swing.JFrame {
                 valor = archRB.read();
                 
             }
+            jtContenidoArchivoOut.setText("Archivo clonado correctamente");
             archRB.close();
             archWB.close();
             
@@ -414,6 +418,7 @@ public class jfEditor extends javax.swing.JFrame {
         File archivoInBuffer = new File(nombreArchivoInBuffer);
         boolean eof = false;
         String lineaLeida = "";
+        
         try {
             BufferedReader lectorMejorado = new BufferedReader(new FileReader(archivoInBuffer));
             while(!eof){
@@ -442,13 +447,24 @@ public class jfEditor extends javax.swing.JFrame {
         File archivoOutBuffer = new File(nombreArchivoOutBuffer);
         boolean eof = false;
         String lineaLeida = "";
-        try {
+        jtContenidoArchivoOut.setText("");
+        File archivo = new File(nombreArchivoOutBuffer);
+        
+        while (!archivo.exists()) {
+            try{
+                archivo.createNewFile();
+            }catch(IOException e){
+                jtContenidoArchivoOut.setText("Error E/S: " + e);
+            }
+        }
+            if (jtflArchivoIn.getText().contains(".txt")) {
+              try {
             BufferedReader lectorMejorado = new BufferedReader(new FileReader(archivoInBuffer));
             BufferedWriter escritorMejorado = new BufferedWriter(new FileWriter(archivoOutBuffer)); 
             while(!eof){
                 lineaLeida = lectorMejorado.readLine();
                 if (lineaLeida != null) {
-                    jtContenidoArchivoIn.append(lineaLeida+"\n");
+                    jtContenidoArchivoOut.append(lineaLeida+"\n");
                     escritorMejorado.write(lineaLeida+"\n");
                 }else{
                     eof = true;
@@ -456,13 +472,67 @@ public class jfEditor extends javax.swing.JFrame {
             }
             lectorMejorado.close();
             escritorMejorado.close();
+            } catch (FileNotFoundException ex) {
+                System.getLogger(jfEditor.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            } catch (IOException ex) {
+                System.getLogger(jfEditor.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }  
+            }
+            
+            if (jtflArchivoIn.getText().contains(".jpg")||jtflArchivoIn.getText().contains(".png")) {
+            try {
+            BufferedInputStream lectorBitsMejorado = new BufferedInputStream(new FileInputStream(archivoInBuffer));
+            BufferedOutputStream escritorBitsMejorado = new BufferedOutputStream(new FileOutputStream(archivoOutBuffer));
+            
+            int unByte;
+            
+            jtContenidoArchivoIn.setText("El archivo se está copiando");
+            
+            while((unByte=lectorBitsMejorado.read())!=-1){
+                
+                escritorBitsMejorado.write(unByte);
+               
+                
+                
+            }
+            jtContenidoArchivoOut.setText("Archivo copiado correctamente");
+            lectorBitsMejorado.close();
+            escritorBitsMejorado.close();
+            
+            } catch(IOException e){
+            jtContenidoArchivoIn.setText("Error E/S: " + e);
+            
+            }
+        }
+        
+        
+        
+    }//GEN-LAST:event_jbProcesarBufferActionPerformed
+
+    private void jbVerArchivoOutBufferActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVerArchivoOutBufferActionPerformed
+        jtContenidoArchivoOut.setText("");
+        String nombreArchivoOutBuffer;
+        nombreArchivoOutBuffer = jtflArchivoOut.getText();
+        File archivoOutBuffer = new File(nombreArchivoOutBuffer);
+        boolean eof = false;
+        String lineaLeida = "";
+        try {
+            BufferedReader lectorMejorado = new BufferedReader(new FileReader(archivoOutBuffer));
+            while(!eof){
+                lineaLeida = lectorMejorado.readLine();
+                if (lineaLeida != null) {
+                    jtContenidoArchivoOut.append(lineaLeida+"\n");
+                }else{
+                    eof = true;
+                }
+            }
+            lectorMejorado.close();
         } catch (FileNotFoundException ex) {
             System.getLogger(jfEditor.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         } catch (IOException ex) {
             System.getLogger(jfEditor.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
-        
-    }//GEN-LAST:event_jbProcesarBufferActionPerformed
+    }//GEN-LAST:event_jbVerArchivoOutBufferActionPerformed
 
     /**
      * @param args the command line arguments
