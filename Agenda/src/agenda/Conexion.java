@@ -26,6 +26,7 @@ public class Conexion {
      //Constantes     
     //private static final String driver = "com.mysql.jdbc.Driver";
     private static final String driver = "com.mysql.cj.jdbc.Driver";
+    //private static final String url = "jdbc:mysql://192.168.3.12:3306/agenda";
     private static final String url = "jdbc:mysql://localhost:3306/agenda";
     private static final String user = "root";     
     //private static final String pass = "mislata";    

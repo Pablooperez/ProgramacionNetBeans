@@ -4,6 +4,7 @@ package agenda;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 public class jfPrincipal extends javax.swing.JFrame {
     //Declaraciones de Clase
@@ -229,24 +230,45 @@ public class jfPrincipal extends javax.swing.JFrame {
     }
     
     private void jbFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbFirstActionPerformed
-        // TODO add your handling code here:
+        try {
+            rs.first();
+            cargarDatos(rs);
+        } catch (SQLException ex) {
+            System.getLogger(jfPrincipal.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }//GEN-LAST:event_jbFirstActionPerformed
 
     private void jbPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPreviousActionPerformed
-        // TODO add your handling code here:
+        try {
+            if (rs.previous()) {
+                cargarDatos(rs);
+            }else{
+             JOptionPane.showMessageDialog(null,"No quedan más registros");   
+            }
+        } catch (SQLException ex) {
+            System.getLogger(jfPrincipal.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }//GEN-LAST:event_jbPreviousActionPerformed
 
     private void jbNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNextActionPerformed
         try {
-            rs.next();
-            cargarDatos(rs);
+            if (rs.next()) {
+                cargarDatos(rs);
+            }else{
+             JOptionPane.showMessageDialog(null,"No quedan más registros");   
+            }
         } catch (SQLException ex) {
             System.getLogger(jfPrincipal.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }//GEN-LAST:event_jbNextActionPerformed
 
     private void jbLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLastActionPerformed
-        // TODO add your handling code here:
+        try {
+            rs.last();
+            cargarDatos(rs);
+        } catch (SQLException ex) {
+            System.getLogger(jfPrincipal.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }//GEN-LAST:event_jbLastActionPerformed
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
@@ -254,7 +276,7 @@ public class jfPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInsertarActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jbInsertarActionPerformed
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
