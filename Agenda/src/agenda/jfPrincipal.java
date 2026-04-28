@@ -27,14 +27,22 @@ public class jfPrincipal extends javax.swing.JFrame {
         cx = new Conexion();
         //Consulta
         String sql = "SELECT * FROM contactos";
-        
+        String resetId = "ALTER TABLE contactos AUTO_INCREMENT = 1";
         try {
             rs = cx.getRS(sql);
-            rs.first();
             
-            cargarDatos(rs);
+            if (rs.isBeforeFirst()) {
+                rs.first();
+                cargarDatos(rs);
+                
+            }else{
+                System.out.println("ERROR --> AGENDA VACÍA");
+            }
+            
+        
+            
         } catch (SQLException ex){
-            
+            JOptionPane.showMessageDialog(null, "Agenda vacía", "AGENDA", JOptionPane.INFORMATION_MESSAGE);
         }
         
         
@@ -227,9 +235,130 @@ public class jfPrincipal extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.getLogger(jfPrincipal.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
-        
+    
+    
+    
     }
     
+    private void insertarDatos(String nombre, String apellidos, String direccion, String poblacion) {
+    String sSql = "INSERT INTO contactos VALUES (NULL, ?, ?, ?, ?)";
+    
+    
+    try {
+        PreparedStatement pps = cx.getConnection().prepareStatement(sSql);
+        pps.setString(1, nombre);
+        pps.setString(2, apellidos);
+        pps.setString(3, direccion);
+        pps.setString(4, poblacion);
+        
+        pps.executeUpdate(); // Mejor usar executeUpdate para INSERT/UPDATE/DELETE
+        String sql = "SELECT * FROM contactos";
+        
+        try {
+            rs = cx.getRS(sql);
+            
+            if (rs.isBeforeFirst()) {
+                rs.first();
+                cargarDatos(rs);
+               
+            }else{
+                System.out.println("ERROR --> AGENDA VACÍA");
+            }
+        } catch (SQLException ex){
+            
+        }
+        JOptionPane.showMessageDialog(null, "Registro añadido", "TAME", JOptionPane.INFORMATION_MESSAGE);
+        
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "ERROR - al insertar datos: " + ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+    }
+}
+    private void actualizarDatos(String nombre, String apellidos, String direccion, String poblacion){
+        //Creamos la variable que va a ser la consulta UPDATE
+        String sSql;
+        sSql="UPDATE contactos SET nombre=?, apellidos=?, direccion=?, poblacion=? WHERE id=?";
+        
+        System.out.println(sSql);
+        
+        //Forma 1
+        
+        try {
+           PreparedStatement pps = cx.getConnection().prepareStatement(sSql);
+            pps.setString(1, jtfNombre.getText());
+            pps.setString(2, jtfApellidos.getText());
+            pps.setString(3, jtfDireccion.getText());
+            pps.setString(4, jtfPoblacion.getText());
+            pps.setString(5, jlId2.getText());
+            pps.executeUpdate();
+            System.out.println("Entra");
+            String sql = "SELECT * FROM contactos";
+            try {
+                rs = cx.getRS(sql);
+            
+                if (rs.isBeforeFirst()) {
+                    rs.first();
+                    cargarDatos(rs);
+                }else{
+                    System.out.println("ERROR --> AGENDA VACÍA");
+                }
+            } catch (SQLException ex){
+            
+        }
+            JOptionPane.showMessageDialog(null, "Registro modificado","TAME",JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException ex) {
+            System.out.println("No entra");
+            JOptionPane.showMessageDialog(null, "ERROR - al modificar datos","ERROR",JOptionPane.ERROR_MESSAGE);
+        }
+        
+        //Forma 2
+        
+        //sSql="UPDATE contactos SET nombre='"+jtfNombre.getText()+"',apellidos='"+jtfApellidos.getText()+"',direccion='"
+        //+jtfDireccion.getText()+"',poblacion='"+jtfPoblacion.getText()
+        //+ "' WHERE id='"+jlId2.getText()+"'"+";";
+        /*try {
+           PreparedStatement pps = cx.getConnection().prepareStatement(sSql);
+            pps.executeUpdate();
+            System.out.println("Entra");
+            JOptionPane.showMessageDialog(null, "Registro modificado","TAME",JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException ex) {
+            System.out.println("No entra");
+            JOptionPane.showMessageDialog(null, "ERROR - al modificar datos","ERROR",JOptionPane.ERROR_MESSAGE);
+        }*/
+    }
+    
+    private void eliminarDatos(String id){
+        //Creamos la variable que va a ejecutar el deleter
+        String sSql;
+        sSql = "DELETE FROM contactos where id = ?";
+        
+        try {
+            PreparedStatement pps = cx.getConnection().prepareStatement(sSql);
+            pps.setString(1,jlId2.getText());
+            pps.execute();
+            String sql = "SELECT * FROM contactos";
+        
+            try {
+                rs = cx.getRS(sql);
+            
+                if (rs.isBeforeFirst()) {
+                    rs.first();
+                    cargarDatos(rs);
+                }else{
+                    System.out.println("ERROR --> AGENDA VACÍA");
+                }
+            } catch (SQLException ex){
+            
+        }
+            JOptionPane.showMessageDialog(null, "Registro eliminado","AGENDA",JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR - al eliminar datos", "AGENDA", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    
+
+            
+            
     private void jbFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbFirstActionPerformed
         try {
             rs.first();
@@ -277,63 +406,17 @@ public class jfPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInsertarActionPerformed
-        //Creamos la variable que va a ser la consulta INSERT
-        String sSql;
-        sSql = "INSERT INTO contactos VALUES (NULL,?,?,?,?)";
-        //Ahora creamos el statement
-        PreparedStatement pps;
-        try {
-            pps = cx.getConnection().prepareStatement(sSql);
-            pps.setString(1, jtfNombre.getText());
-            pps.setString(2, jtfApellidos.getText());
-            pps.setString(3, jtfDireccion.getText());
-            pps.setString(4, jtfPoblacion.getText());
-            pps.execute();
-            JOptionPane.showMessageDialog(null, "Registro añadido","TAME",JOptionPane.INFORMATION_MESSAGE);
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "ERROR - al insertr datos","ERROR",JOptionPane.ERROR_MESSAGE);
-        }
+        insertarDatos(jtfNombre.getText(),jtfApellidos.getText(),jtfDireccion.getText(),jtfPoblacion.getText());
         
     }//GEN-LAST:event_jbInsertarActionPerformed
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
-        //Creamos la variable que va a ser la consulta UPDATE
-        String sSql;
-        sSql="UPDATE contactos SET nombre=?, apellidos=?, direccion=?, poblacion=? WHERE id=?";
-        
-        System.out.println(sSql);
-        
-        try {
-           PreparedStatement pps = cx.getConnection().prepareStatement(sSql);
-            pps.setString(1, jtfNombre.getText());
-            pps.setString(2, jtfApellidos.getText());
-            pps.setString(3, jtfDireccion.getText());
-            pps.setString(4, jtfPoblacion.getText());
-            pps.setString(5, jlId2.getText());
-            pps.executeUpdate();
-            System.out.println("Entra");
-            JOptionPane.showMessageDialog(null, "Registro modificado","TAME",JOptionPane.INFORMATION_MESSAGE);
-        } catch (SQLException ex) {
-            System.out.println("No entra");
-            JOptionPane.showMessageDialog(null, "ERROR - al modificar datos","ERROR",JOptionPane.ERROR_MESSAGE);
-        }
-        //sSql="UPDATE contactos SET nombre='"+jtfNombre.getText()+"',apellidos='"+jtfApellidos.getText()+"',direccion='"
-        //+jtfDireccion.getText()+"',poblacion='"+jtfPoblacion.getText()
-        //+ "' WHERE id='"+jlId2.getText()+"'"+";";
-        /*try {
-           PreparedStatement pps = cx.getConnection().prepareStatement(sSql);
-            pps.executeUpdate();
-            System.out.println("Entra");
-            JOptionPane.showMessageDialog(null, "Registro modificado","TAME",JOptionPane.INFORMATION_MESSAGE);
-        } catch (SQLException ex) {
-            System.out.println("No entra");
-            JOptionPane.showMessageDialog(null, "ERROR - al modificar datos","ERROR",JOptionPane.ERROR_MESSAGE);
-        }*/
+        actualizarDatos(jtfNombre.getText(), jtfApellidos.getText(), jtfDireccion.getText(), jtfPoblacion.getText());
         
     }//GEN-LAST:event_jbActualizarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-        // TODO add your handling code here:
+        eliminarDatos(jlId2.getText());
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
