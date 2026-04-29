@@ -29,18 +29,18 @@ public class jfPrincipal extends javax.swing.JFrame {
         String sql = "SELECT * FROM contactos";
         String resetId = "ALTER TABLE contactos AUTO_INCREMENT = 1";
         try {
-            rs = cx.getRS(sql);
             
+            rs = cx.getRS(sql);
             if (rs.isBeforeFirst()) {
                 rs.first();
                 cargarDatos(rs);
                 
+                
+                
             }else{
                 System.out.println("ERROR --> AGENDA VACÍA");
             }
-            
-        
-            
+           
         } catch (SQLException ex){
             JOptionPane.showMessageDialog(null, "Agenda vacía", "AGENDA", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -72,6 +72,7 @@ public class jfPrincipal extends javax.swing.JFrame {
         jbSalir = new javax.swing.JButton();
         jlId = new javax.swing.JLabel();
         jlId2 = new javax.swing.JLabel();
+        jbNuevo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -117,6 +118,9 @@ public class jfPrincipal extends javax.swing.JFrame {
 
         jlId.setText("ID:");
 
+        jbNuevo.setText("Nuevo");
+        jbNuevo.addActionListener(this::jbNuevoActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -135,36 +139,43 @@ public class jfPrincipal extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jbLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jbInsertar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jbActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jbEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
-                                .addComponent(jbSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jlNombre)
-                                        .addComponent(jlApellidos)
-                                        .addComponent(jlDireccion)
-                                        .addComponent(jlPoblacion))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jtfApellidos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
-                                        .addComponent(jtfPoblacion, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jtfNombre)
-                                        .addComponent(jtfDireccion))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(164, 164, 164)
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jlId, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jlId2)))))
+                                .addComponent(jlId2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jbLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jbInsertar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jbActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jbEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jlNombre)
+                                                .addComponent(jlApellidos)
+                                                .addComponent(jlDireccion)
+                                                .addComponent(jlPoblacion))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(jtfApellidos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
+                                                .addComponent(jtfPoblacion, javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jtfNombre)
+                                                .addComponent(jtfDireccion))))
+                                    .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(11, 11, 11))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(173, 173, 173)
+                .addComponent(jbNuevo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,9 +218,11 @@ public class jfPrincipal extends javax.swing.JFrame {
                     .addComponent(jbInsertar)
                     .addComponent(jbActualizar)
                     .addComponent(jbEliminar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbNuevo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbSalir)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -343,6 +356,7 @@ public class jfPrincipal extends javax.swing.JFrame {
                 if (rs.isBeforeFirst()) {
                     rs.first();
                     cargarDatos(rs);
+                    limpiarCampos();
                 }else{
                     System.out.println("ERROR --> AGENDA VACÍA");
                 }
@@ -354,6 +368,8 @@ public class jfPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "ERROR - al eliminar datos", "AGENDA", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+
     
     
 
@@ -423,6 +439,10 @@ public class jfPrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jbSalirActionPerformed
 
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+        limpiarCampos();
+    }//GEN-LAST:event_jbNuevoActionPerformed
+
    
     public static void main(String args[]) {
         
@@ -438,6 +458,7 @@ public class jfPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jbLast;
     private javax.swing.JButton jbLimpiar;
     private javax.swing.JButton jbNext;
+    private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbPrevious;
     private javax.swing.JButton jbSalir;
     private javax.swing.JLabel jlApellidos;
