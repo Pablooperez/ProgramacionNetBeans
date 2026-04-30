@@ -26,17 +26,17 @@ public class jfPrincipal extends javax.swing.JFrame {
         //Conectar con MySql Agenda
         cx = new Conexion();
         //Consulta
+        actualizarID();
+        
         String sql = "SELECT * FROM contactos";
-        String resetId = "ALTER TABLE contactos AUTO_INCREMENT = 1";
-        try {
-            
+        
+        
+        try {    
             rs = cx.getRS(sql);
             if (rs.isBeforeFirst()) {
                 rs.first();
                 cargarDatos(rs);
-                
-                
-                
+                System.out.println("Entra RS");
             }else{
                 System.out.println("ERROR --> AGENDA VACÍA");
             }
@@ -288,10 +288,12 @@ public class jfPrincipal extends javax.swing.JFrame {
 }
     private void actualizarDatos(String nombre, String apellidos, String direccion, String poblacion){
         //Creamos la variable que va a ser la consulta UPDATE
+        
+        
         String sSql;
         sSql="UPDATE contactos SET nombre=?, apellidos=?, direccion=?, poblacion=? WHERE id=?";
         
-        System.out.println(sSql);
+        
         
         //Forma 1
         
@@ -356,7 +358,7 @@ public class jfPrincipal extends javax.swing.JFrame {
                 if (rs.isBeforeFirst()) {
                     rs.first();
                     cargarDatos(rs);
-                    limpiarCampos();
+                    
                 }else{
                     System.out.println("ERROR --> AGENDA VACÍA");
                 }
@@ -369,6 +371,18 @@ public class jfPrincipal extends javax.swing.JFrame {
         }
     }
     
+    private void actualizarID(){
+        String sSql = "ALTER TABLE contactos AUTO_INCREMENT = 1";
+        try {
+            PreparedStatement pps = cx.getConnection().prepareStatement(sSql);
+            pps.execute();
+            System.out.println("Entra");
+        } catch (SQLException ex) {
+            System.out.println("No entra");
+            System.getLogger(jfPrincipal.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }
+    
 
     
     
@@ -376,6 +390,7 @@ public class jfPrincipal extends javax.swing.JFrame {
             
             
     private void jbFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbFirstActionPerformed
+        actualizarID();
         try {
             rs.first();
             cargarDatos(rs);
@@ -385,6 +400,7 @@ public class jfPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbFirstActionPerformed
 
     private void jbPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPreviousActionPerformed
+        actualizarID();
         try {
             if (rs.previous()) {
                 cargarDatos(rs);
@@ -397,6 +413,7 @@ public class jfPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbPreviousActionPerformed
 
     private void jbNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNextActionPerformed
+        actualizarID();
         try {
             if (rs.next()) {
                 cargarDatos(rs);
@@ -409,6 +426,7 @@ public class jfPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbNextActionPerformed
 
     private void jbLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLastActionPerformed
+        actualizarID();
         try {
             rs.last();
             cargarDatos(rs);
@@ -422,16 +440,19 @@ public class jfPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInsertarActionPerformed
+        actualizarID();
         insertarDatos(jtfNombre.getText(),jtfApellidos.getText(),jtfDireccion.getText(),jtfPoblacion.getText());
         
     }//GEN-LAST:event_jbInsertarActionPerformed
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
+        actualizarID();
         actualizarDatos(jtfNombre.getText(), jtfApellidos.getText(), jtfDireccion.getText(), jtfPoblacion.getText());
         
     }//GEN-LAST:event_jbActualizarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        actualizarID();
         eliminarDatos(jlId2.getText());
     }//GEN-LAST:event_jbEliminarActionPerformed
 
