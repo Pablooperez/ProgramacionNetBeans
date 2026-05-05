@@ -9,6 +9,8 @@ class PruebasFormulario extends JFrame implements ActionListener, ItemListener{
     
     JButton c1;
     JTextField jtNombre1;
+    JLabel jlabel;
+    JComboBox jcombobox;
     public PruebasFormulario(){
         crearDisenyo();
     }
@@ -32,6 +34,16 @@ class PruebasFormulario extends JFrame implements ActionListener, ItemListener{
             jtNombre1.setText("hola");
             
         //JLabel
+        jlabel = new JLabel("HOLA A TODO EL MUNDO");
+            jlabel.setBounds(10,10,180,120);
+            add(jlabel);
+        
+        //JComboBox
+        jcombobox = new JComboBox();
+            jcombobox.setBounds(50,50,60,20);
+            for (int i = 0; i < 1000; i++) {
+                    jcombobox.addItem(String.valueOf(i));
+        }
             
     }
     @Override

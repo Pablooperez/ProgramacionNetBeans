@@ -114,7 +114,7 @@ public class jfLogin extends javax.swing.JFrame {
     
     public void verificarUsuario(){
         String sSql;
-        //sSql = "SELECT * FROM usuarios where nombre = ?, pass = ?";
+        //sSql = "SELECT * FROM usuarios where nombre = ? and pass = ?";
         sSql = "SELECT * FROM usuarios where nombre ='" + jtfNombre.getText()+ "' and  pass = '" + String.valueOf(jpContraseña.getPassword())+"'";
         System.out.println(sSql);
         

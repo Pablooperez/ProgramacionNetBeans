@@ -26,10 +26,7 @@ public class jfPrincipal extends javax.swing.JFrame {
         //Conectar con MySql Agenda
         cx = new Conexion();
         //Consulta
-        actualizarID();
-        
         String sql = "SELECT * FROM contactos";
-        
         
         try {    
             rs = cx.getRS(sql);
